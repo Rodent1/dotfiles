@@ -5,5 +5,5 @@ My dotfiles managed by chezmoi
 ## first time set up
 
 ```sh
-chezmoi init git@github.com:Rodent1/dotfiles.git
+curl https://raw.githubusercontent.com/Rodent1/dotfiles/main/install.sh | bash
 ```
