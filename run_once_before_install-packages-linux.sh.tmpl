@@ -25,19 +25,21 @@ else
   echo "Homebrew is already installed."
 fi
 
+# Update homebrew packages
+echo "Initiating Homebrew update..."
+brew update
+
 # Check if the fish shell is installed
 if ! command -v fish &> /dev/null
 then
   echo "Installing fish shell..."
   brew install fish
   echo "/home/linuxbrew/.linuxbrew/bin/brew" | sudo tee -a /etc/shells
+  chsh -s /home/linuxbrew/.linuxbrew/bin/brew
+  fish
 else
   echo "Fish shell is already installed."
 fi
-
-# Update homebrew packages
-echo "Initiating Homebrew update..."
-brew update
 
 echo "Installing packages..."
 for package in "${packages[@]}"
