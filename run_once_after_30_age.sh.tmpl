@@ -4,6 +4,8 @@
 # Install age key
 echo "Installing AGE key..."
 
+mkdir -p {{ .chezmoi.homeDir }}/.config/sops/age
+
 set key "age key"
 
 eval $(op.exe signin)
