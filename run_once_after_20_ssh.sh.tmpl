@@ -7,6 +7,8 @@ mkdir -p ~/.ssh
 
 set key "id_ed25519"
 
+eval $(op.exe signin)
+
 set key_data $(op.exe item get "$key" --format json)
 set private_key $(echo $key_data | jq -r '.fields[] | select(.label=="private key") | .value')
 set public_key $(echo $key_data | jq -r '.fields[] | select(.label=="public key") | .value')
