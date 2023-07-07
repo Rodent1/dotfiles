@@ -5,7 +5,7 @@
 echo "Installing SSH key..."
 mkdir -p ~/.ssh
 
-key="id_ed25519"
+set key "id_ed25519"
 
 key_data=$(op.exe item get "$key" --format json)
 private_key=$(echo $key_data | jq -r '.fields[] | select(.label=="private key") | .value')
