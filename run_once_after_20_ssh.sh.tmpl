@@ -1,23 +1,29 @@
 #!{{ lookPath "bash" }}
 
 if command -v op.exe >/dev/null 2>&1; then
-  # Install ssh key
-  echo "Installing SSH key..."
+  # Install ssh keys
+  echo "Installing SSH keys..."
   mkdir -p ~/.ssh
 
-  key="id_ed25519"
+  keys=("id_ed25519" "ansible_key")
 
   eval $(op.exe signin)
 
-  key_data=$(op.exe item get "$key" --format json)
-  private_key=$(echo "$key_data" | jq -r '.fields[] | select(.label=="private key") | .value')
-  public_key=$(echo "$key_data" | jq -r '.fields[] | select(.label=="public key") | .value')
+  for key in "${keys[@]}"; do
+    key_data=$(op.exe item get "$key" --format json)
+    private_key=$(echo "$key_data" | jq -r '.fields[] | select(.label=="private key") | .value')
+    public_key=$(echo "$key_data" | jq -r '.fields[] | select(.label=="public key") | .value')
 
-  echo -e "$private_key" > ~/.ssh/id_ed25519
-  echo -e "$public_key" > ~/.ssh/id_ed25519.pub
+    echo -e "$private_key" > ~/.ssh/$key
+    echo -e "$public_key" > ~/.ssh/$key.pub
 
-  chmod 600 ~/.ssh/id_ed25519
-  chmod 600 ~/.ssh/id_ed25519.pub
+    chmod 600 ~/.ssh/$key
+    chmod 600 ~/.ssh/$key.pub
+
+    # Add the key to the ssh-agent
+    ssh-add ~/.ssh/$key
+  done
+
 else
   echo "op.exe not found. Skipping ssh key installation."
 fi
