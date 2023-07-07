@@ -1,20 +1,19 @@
-#!{{ lookPath "fish" }}
+#!{{ lookPath "bash" }}
 
-{{- if lookPath "op.exe" }}
-# Install age key
-echo "Installing AGE key..."
+if command -v op.exe >/dev/null 2>&1; then
+  # Install age key
+  echo "Installing AGE key..."
 
-mkdir -p {{ .chezmoi.homeDir }}/.config/sops/age
+  mkdir -p {{ .chezmoi.homeDir }}/.config/sops/age
 
-set key "age key"
+  key="age key"
 
-eval (op.exe signin)
+  eval $(op.exe signin)
 
-set key_data (op.exe item get "$key" --format json | psub)
-set agekey (jq -r '.fields[] | select(.label=="key") | .value' $key_data | psub)
+  key_data=$(op.exe item get "$key" --format json)
+  agekey=$(echo "$key_data" | jq -r '.fields[] | select(.label=="key") | .value')
 
-cat $agekey > {{ .chezmoi.homeDir }}/.config/sops/age/keys.txt
-
-{{- else -}}
-echo "op.exe not found. Skipping age key installation."
-{{- end -}}
+  echo -n "$agekey" > {{ .chezmoi.homeDir }}/.config/sops/age/keys.txt
+else
+  echo "op.exe not found. Skipping age key installation."
+fi
