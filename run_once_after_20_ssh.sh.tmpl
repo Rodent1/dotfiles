@@ -1,0 +1,22 @@
+#!{{ lookPath "fish" }}
+
+{{- if lookPath "op.exe" }}
+# Install ssh key
+echo "Installing SSH key..."
+mkdir -p ~/.ssh
+
+key="id_ed25519"
+
+key_data=$(op.exe item get "$key" --format json)
+private_key=$(echo $key_data | jq -r '.fields[] | select(.label=="private key") | .value')
+public_key=$(echo $key_data | jq -r '.fields[] | select(.label=="public key") | .value')
+
+echo -e "$private_key" > ~/.ssh/id_ed25519
+echo -e "$public_key" > ~/.ssh/id_ed25519.pub
+
+chmod 600 ~/.ssh/id_ed25519
+chmod 600 ~/.ssh/id_ed25519.pub
+
+{{- else -}}
+echo "op.exe not found. Skipping ssh key installation."
+{{- end -}}
