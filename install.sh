@@ -13,8 +13,10 @@ sudo apt -y install build-essential &> /dev/null
 echo "Installing fish shell..."
 sudo apt -y install fish &> /dev/null
 chsh -s /usr/bin/fish
-fish
 
 # Install chezmoi and init this repo
 echo "Installing chezmoi..."
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Rodent1
+fish -c 'sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Rodent1'
+
+# Launch a new fish shell
+fish
