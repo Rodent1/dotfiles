@@ -5,7 +5,7 @@ if command -v op.exe >/dev/null 2>&1; then
   echo "Installing SSH keys..."
   mkdir -p ~/.ssh
 
-  keys=("id_ed25519" "ansible_key")
+  keys=("id_ed25519")
 
   eval $(op.exe signin)
 
