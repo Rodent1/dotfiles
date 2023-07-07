@@ -9,14 +9,9 @@ sudo apt -y upgrade &> /dev/null
 echo "Installing build-essential..."
 sudo apt -y install build-essential &> /dev/null
 
-# Install fish
-echo "Installing fish shell..."
-sudo apt -y install fish &> /dev/null
-chsh -s /usr/bin/fish
-
-# Install chezmoi and init this repo
+# Install Chezmoi
 echo "Installing chezmoi..."
-fish -c 'sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Rodent1'
+sh -c "$(curl -fsLS get.chezmoi.io)"
 
-# Launch a new fish shell
-fish
+# Echo out chezmoi command
+echo "Run the following command to apply dotfiles: chezmoi init --apply Rodent1"
