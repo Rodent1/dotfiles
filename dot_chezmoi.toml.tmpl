@@ -3,10 +3,6 @@
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
 {{- "" -}}
 
-{{- $osID := .chezmoi.os -}}
-{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
-{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
-{{- end -}}
 
 {{/* detect GitHub codespaces, Coder remote, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") (env "CODER") -}}
@@ -26,5 +22,3 @@
     name = {{ $name | quote }}
     email = {{ $email | quote }}
     headless = {{ $headless }}
-    hostname = {{ $hostname | quote }}
-    osid = {{ $osID | quote }}
