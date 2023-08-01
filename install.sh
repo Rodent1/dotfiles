@@ -1,17 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-# Update packages
-echo "Updating system..."
-sudo apt update &> /dev/null
-sudo apt -y upgrade &> /dev/null
+set -e # -e: exit on error
 
-# Install build-essential
-echo "Installing build-essential..."
-sudo apt -y install build-essential &> /dev/null
-
-# Install Chezmoi
 if [ ! "$(command -v chezmoi)" ]; then
   bin_dir="$HOME/.local/bin"
+  chezmoi="$bin_dir/chezmoi"
   if [ "$(command -v curl)" ]; then
     sh -c "$(curl -fsSL https://git.io/chezmoi)" -- -b "$bin_dir"
   elif [ "$(command -v wget)" ]; then
@@ -20,7 +13,11 @@ if [ ! "$(command -v chezmoi)" ]; then
     echo "To install chezmoi, you must have curl or wget installed." >&2
     exit 1
   fi
+else
+  chezmoi=chezmoi
 fi
 
-# Echo out chezmoi command
-echo "Run the following command to apply dotfiles: chezmoi init --apply Rodent1"
+# POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
+script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
+# exec: replace current process with chezmoi init
+exec "$chezmoi" init --apply "--source=$script_dir"
