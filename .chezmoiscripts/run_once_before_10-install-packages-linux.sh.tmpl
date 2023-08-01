@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-{{- if (and (eq .chezmoi.os "linux") (.codespaces)) -}}
+{{- if (and (eq .chezmoi.os "linux") (.headless)) -}}
 export HOMEBREW_PREFIX="$HOME/.homebrew"
 {{- end -}}
 
