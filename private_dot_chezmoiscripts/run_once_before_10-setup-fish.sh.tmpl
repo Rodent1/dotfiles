@@ -35,11 +35,13 @@ if [ "$(pacman -Qq fish 2> /dev/null)" != fish ]; then
 fi
 {{   end -}}
 
+{{- if (and (eq .chezmoi.os "linux") (not .codespaces) (not .coder)) -}}
 # Set fish as default shell
 if [ $SHELL != $(which fish) ]; then
   echo "Changing default shell to fish"
   chsh -s $(which fish)
 fi
+{{- end -}}
 
 echo -e "\0033[0;32m>>>>> Finish Setting Up Fish Shell <<<<<\033[0m"
 {{ end -}}
