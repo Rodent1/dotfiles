@@ -3,6 +3,10 @@
 
 set -euo pipefail
 
+{{- if (and (eq .chezmoi.os "linux") (.codespaces)) -}}
+export HOMEBREW_PREFIX="$HOME/homebrew"
+{{- end -}}
+
 packages=(
   fish
   starship 
