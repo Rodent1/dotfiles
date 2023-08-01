@@ -3,9 +3,9 @@
 
 set -euo pipefail
 
-{{- if (and (eq .chezmoi.os "linux") (.headless)) -}}
+{{-   if (and (eq .chezmoi.os "linux") (.headless)) -}}
 export HOMEBREW_PREFIX="$HOME/.homebrew"
-{{- end -}}
+{{-   end -}}
 
 packages=(
   fish
