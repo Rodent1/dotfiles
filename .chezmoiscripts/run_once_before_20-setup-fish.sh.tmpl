@@ -1,3 +1,4 @@
+{{- if (and(eq .chezmoi.os "linux") (not .headless )) -}}
 #!/bin/bash
 set -euo pipefail
 
@@ -19,3 +20,4 @@ if [ $SHELL != $fish_path ]; then
 fi
 
 echo "Finish Setting Up Fish Shell"
+{{ end -}}
