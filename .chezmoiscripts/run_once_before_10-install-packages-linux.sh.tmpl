@@ -27,7 +27,7 @@ if ! command -v brew &> /dev/null
 then
   echo "Installing homebrew..."
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash &> /dev/null
-  (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.profile
+  (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.bashrc
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
   echo "Homebrew is already installed."
