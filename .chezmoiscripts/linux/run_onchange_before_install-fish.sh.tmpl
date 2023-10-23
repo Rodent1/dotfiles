@@ -1,23 +1,6 @@
-{{- if (and (eq .chezmoi.os "linux") (not .headless)) -}}
 #!/bin/bash
 set -euo pipefail
 
-echo "Begin Setting Up Fish Shell"
-
-# Get the path to Fish
-fish_path=$(which fish)
-
-# Check if Fish is in the shell list
-if ! grep -q "^$fish_path$" /etc/shells; then
-  echo "Adding Fish to the shell list"
-  echo $fish_path | sudo tee -a /etc/shells
-fi
-
-# Set Fish as default shell if not already set
-if [ $SHELL != $fish_path ]; then
-  echo "Changing default shell to fish"
-  sudo chsh "$(id -un)" --shell $fish_path
-fi
-
-echo "Finish Setting Up Fish Shell"
-{{ end -}}
+echo "Adding fish to /etc/shells and changing shell to fish"
+echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
+sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
