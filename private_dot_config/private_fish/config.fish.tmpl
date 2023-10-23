@@ -9,7 +9,7 @@ set -gx PY_COLORS true
 set -gx GPG_TTY (tty)
 
 {{ if .headless -}}
-set -gx  LC_ALL en_US.UTF-8
+set -gx LC_ALL en_US.UTF-8
 {{ end -}}
 
 {{- if stat (joinPath .chezmoi.homeDir ".config/age/age.key") }}
