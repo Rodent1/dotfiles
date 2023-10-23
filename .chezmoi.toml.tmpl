@@ -4,8 +4,6 @@
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- "" -}}
 
-{{- $hostname = .chezmoi.hostname -}}
-
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
@@ -29,7 +27,7 @@
     email = {{ $email | quote }}
     ephemeral = {{ $ephemeral }}    
     headless = {{ $headless }}
-    hostname = {{ $hostname | quote }}
+    hostname = {{ .chezmoi.hostname | quote }}
     personal = {{ $personal }}
     onepasswordAccount = "RGFPP2NOSFHP3JQ4Y6RT67FQMY"
     osid = {{ $osID | quote }}    
