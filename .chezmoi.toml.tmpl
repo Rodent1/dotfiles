@@ -1,8 +1,13 @@
 {{/* boolean feature tags */}}
 {{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- "" -}}
 
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
 
 {{/* detect GitHub codespaces, Coder remote, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") (env "CODER") -}}
@@ -18,7 +23,11 @@
 {{- $email := "stian.sporaland@pm.me" -}}
 
 [data]
-    ephemeral = {{ $ephemeral }}
     name = {{ $name | quote }}
     email = {{ $email | quote }}
+    ephemeral = {{ $ephemeral }}    
     headless = {{ $headless }}
+    hostname = {{ $hostname | quote }}
+    personal = {{ $personal }}
+    onepasswordAccount = "RGFPP2NOSFHP3JQ4Y6RT67FQMY"
+    osid = {{ $osID | quote }}    
