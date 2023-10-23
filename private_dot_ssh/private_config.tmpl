@@ -4,66 +4,12 @@ Host *
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
   IdentityFile ~/.ssh/id_rsa
+
 {{- if (eq .chezmoi.os "darwin") }}
   IgnoreUnknown UseKeychain
   UseKeychain yes
 {{- end }}
 
-Host 192.168.*.*
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-Host 172.16.*.*
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-Host 10.*.*.*
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host kube-0
-  HostName 10.1.1.40
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host kube-1
-  HostName 10.1.1.41
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host kube-2
-  HostName 10.1.1.42
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host kube-3
-  HostName 10.1.1.43
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host kube-4
-  HostName 10.1.1.44
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host tank
-  User rodent
-  HostName 10.1.1.15
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host xo
-  User rodent
-  HostName 10.1.1.16
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host lapetus
-  User root
-  HostName 10.1.1.21
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
-
-Host prometheus
-  User root
-  HostName 10.1.1.22
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
+{{- if .personal }}
+{{ onepasswordRead "op://Personal/SSH Config/notesPlain" .onepasswordAccount }}
+{{- end }}
