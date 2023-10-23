@@ -4,6 +4,8 @@
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- "" -}}
 
+{{- $hostname = $computerName -}}
+
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
