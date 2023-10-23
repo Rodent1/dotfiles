@@ -1,0 +1,6 @@
+{{ if .headless -}}
+#!/bin/sh
+
+sudo chsh -s $(which fish) $(whoami)
+
+{{- end -}}
