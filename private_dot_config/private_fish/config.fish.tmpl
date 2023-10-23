@@ -1,4 +1,3 @@
-set -gx KUBE_EDITOR nano
 set -gx VISUAL nano
 set -gx KUBE_EDITOR "code -w"
 set -gx HOMEBREW_NO_ANALYTICS 1
@@ -9,8 +8,12 @@ set -gx KUBECONFIG /dev/null
 set -gx PY_COLORS true
 set -gx GPG_TTY (tty)
 
-{{- if stat (joinPath .chezmoi.homeDir ".config/sops/age/keys.txt") }}
-set -gx SOPS_AGE_KEY_FILE {{ .chezmoi.homeDir }}/.config/sops/age/keys.txt
+{{ if .headless -}}
+set -gx  LC_ALL en_US.UTF-8
+{{ end -}}
+
+{{- if stat (joinPath .chezmoi.homeDir ".config/age/age.key") }}
+set -gx SOPS_AGE_KEY_FILE {{ .chezmoi.homeDir }}/.config/age/age.key
 {{- end }}
 
 fish_add_path "{{ .chezmoi.homeDir }}/.local/bin"
