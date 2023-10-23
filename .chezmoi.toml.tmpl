@@ -4,7 +4,7 @@
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- "" -}}
 
-{{- $hostname = $computerName -}}
+{{- $hostname = .chezmoi.hostname -}}
 
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
