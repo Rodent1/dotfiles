@@ -1,6 +1,8 @@
 {{ if .headless -}}
 #!/bin/sh
 
+echo "Adding fish to /etc/shells and changing shell to fish"
+echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
 sudo chsh -s $(which fish) $(whoami)
 
 {{- end -}}
