@@ -1,0 +1,30 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+
+set -eufo pipefail
+set -x  # Enable debugging
+
+# Check if we're on an apt-capable system
+if command -v apt-get &> /dev/null; then
+    echo "System is apt-capable."
+else
+    echo "This system does not use apt package manager."
+    exit 1
+fi
+
+# Check if build-essential is installed
+if dpkg -l | grep -q 'build-essential'; then
+    echo "build-essential is already installed."
+else
+    echo "build-essential is not installed. Installing..."
+    sudo apt-get update
+    sudo apt-get install build-essential
+    if [ $? -eq 0 ]; then
+        echo "build-essential has been successfully installed."
+    else
+        echo "Failed to install build-essential."
+        exit 1
+    fi
+fi
+
+{{ end -}}
