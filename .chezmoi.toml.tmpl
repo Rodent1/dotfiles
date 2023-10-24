@@ -21,8 +21,8 @@
 
 {{- if (and (not $ephemeral ) (not $headless)) -}}
 {{-   $choices := list "Yes" "No" -}}
-{{-   $personal := promptChoice "Personal machine?" $choices -}}
-{{-   if eq $personal "Yes" -}}
+{{-   $personalChoice := promptChoice "Personal machine?" $choices -}}
+{{-   if eq $personalChoice "Yes" -}}
 {{-     $personal = true -}}
 {{-   end -}}
 {{- end }}
