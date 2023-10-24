@@ -4,6 +4,8 @@
 set -eufo pipefail
 set -x  # Enable debugging
 
+export OP_SERVICE_ACCOUNT_TOKEN={{ output "cat" ".config/op/op.key" -}}
+
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 	sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
 
