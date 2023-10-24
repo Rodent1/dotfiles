@@ -34,3 +34,10 @@
     personal = {{ $personal }}
     hostname = {{ .chezmoi.hostname | quote }}    
     osid = {{ $osID | quote }}    
+
+{{ if .personal -}}
+encryption = "age"
+[age]
+    identity = "~/.config/chezmoi/key.txt"
+    recipient = "age1062zlekr62v6vnwkeh6gw9ggwq0dhlat2v5mfsr6s0tj6f36fczsdyf5f8"
+{{- end -}}
