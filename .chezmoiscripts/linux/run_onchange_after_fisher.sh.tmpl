@@ -1,6 +1,6 @@
 #!{{ lookPath "fish" }}
 
-set -eufo pipefail
+set -e -o pipefail
 set -x  # Enable debugging
 
 # .config/fish/fish_plugins hash: {{ include "private_dot_config/private_fish/fish_plugins.tmpl" | sha256sum }}
