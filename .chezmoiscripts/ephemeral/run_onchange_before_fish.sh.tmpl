@@ -1,6 +1,8 @@
 {{- if .ephemeral -}}
 #!/bin/bash
+
 set -eufo pipefail
+set -x  # Enable debugging
 
 echo "Adding fish to /etc/shells and changing shell to fish"
 echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells

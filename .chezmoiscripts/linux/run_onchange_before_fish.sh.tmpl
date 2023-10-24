@@ -2,6 +2,7 @@
 #!/bin/bash
 
 set -eufo pipefail
+set -x  # Enable debugging
 
 if ! grep -qxF "$(which fish)" /etc/shells; then
   echo $(which fish) | sudo tee -a /etc/shells

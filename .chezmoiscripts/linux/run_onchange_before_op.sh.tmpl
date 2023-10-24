@@ -1,6 +1,9 @@
 {{ if and (eq .osid "linux-ubuntu") .personal -}}
 #!/bin/sh
 
+set -eufo pipefail
+set -x  # Enable debugging
+
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 	sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
 
