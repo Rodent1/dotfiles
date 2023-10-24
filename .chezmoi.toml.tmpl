@@ -20,7 +20,11 @@
 {{- end -}}
 
 {{- if (and (not $ephemeral ) (not $headless)) -}}
-{{-   $personal := promptBool "Personal machine? (true/false)" false -}}
+{{-   $choices := list "Yes" "No" -}}
+{{-   $personal := promptChoice "Personal machine?" $choices -}}
+{{-   if eq $personal "Yes" -}}
+{{-     $personal = true -}}
+{{-   end -}}
 {{- end }}
 
 {{- $name := "Stian Rossavik Sporaland" -}}
