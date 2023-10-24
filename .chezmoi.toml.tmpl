@@ -40,7 +40,7 @@
     hostname = {{ .chezmoi.hostname | quote }}
     osid = {{ $osID | quote }}
 
-{{ if .personal -}}
+{{ if $personal -}}
 encryption = "age"
 [age]
     identity = "~/.config/chezmoi/key.txt"
