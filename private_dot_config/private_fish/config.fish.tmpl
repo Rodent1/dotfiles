@@ -9,7 +9,6 @@ set -gx PY_COLORS true
 set -gx GPG_TTY (tty)
 {{- if .personal -}}
 set -gx OP_SERVICE_ACCOUNT_TOKEN {{ output "cat" ".config/op/op.key" -}}
- }}
 {{- end -}}
 
 {{- if stat (joinPath .chezmoi.homeDir ".config/age/age.key") }}
