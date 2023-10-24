@@ -6,23 +6,23 @@ set -x  # Enable debugging
 
 # Check if we're on an apt-capable system
 if command -v apt-get &> /dev/null; then
-    echo "System is apt-capable."
+    echo "\[\e[32m\]✔ \[\e[0m\] System is apt-capable."
 else
-    echo "This system does not use apt package manager."
+    echo "\[\e[31m\]✘ \[\e[0m\] This system does not use apt package manager."
     exit 1
 fi
 
 # Check if build-essential is installed
 if dpkg -l | grep -q 'build-essential'; then
-    echo "build-essential is already installed."
+    echo "\[\e[32m\]✔ \[\e[0m\] Build-essential is already installed."
 else
-    echo "build-essential is not installed. Installing..."
+    echo "\[\e[33m\]⚠ \[\e[0m\] Build-essential is not installed. Installing..."
     sudo apt-get update
     sudo apt-get -y install build-essential
     if [ $? -eq 0 ]; then
-        echo "build-essential has been successfully installed."
+        echo "\[\e[32m\]✔ \[\e[0m\] Build-essential has been successfully installed."
     else
-        echo "Failed to install build-essential."
+        echo "\[\e[31m\]✘ \[\e[0m\] Failed to install build-essential."
         exit 1
     fi
 fi

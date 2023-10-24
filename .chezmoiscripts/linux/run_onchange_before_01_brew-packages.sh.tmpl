@@ -29,19 +29,19 @@ packages=(
 # If Homebrew is not installed on the system, it will be installed here
 if ! command -v brew &> /dev/null
 then
-  echo "Installing homebrew..."
+  echo "\[\e[33m\]⚠ \[\e[0m\] Installing homebrew..."
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash &> /dev/null
   (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.bashrc
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
-  echo "Homebrew is already installed."
+  echo "\[\e[32m\]✔ \[\e[0m\] Homebrew is already installed."
 fi
 
 # Update homebrew packages
-echo "Initiating Homebrew update..."
+echo "\[\e[33m\]⚠ \[\e[0m\] Initiating Homebrew update..."
 brew update
 
-echo "Installing packages..."
+echo "\[\e[33m\]⚠ \[\e[0m\] Installing packages..."
 for package in "${packages[@]}"
 do
   brew install "$package"
