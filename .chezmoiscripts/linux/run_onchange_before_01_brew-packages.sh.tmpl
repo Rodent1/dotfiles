@@ -4,10 +4,6 @@
 set -euo pipefail
 set -x  # Enable debugging
 
-{{   if (.headless) -}}
-export HOMEBREW_PREFIX="$HOME/.homebrew"
-{{   end -}}
-
 packages=(
   fish
   starship 
