@@ -13,6 +13,6 @@ Host *
   UseKeychain yes
 {{- end }}
 
-{{- if .personal }}
+{{ if .personal -}}
 {{ output \"op\" \"read\" \"op://dotfiles/ssh config/notesPlain\" }}
-{{- end }}
+{{ end -}}
