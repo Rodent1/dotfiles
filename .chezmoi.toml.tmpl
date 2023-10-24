@@ -29,13 +29,11 @@
 {{- $name := "Stian Rossavik Sporaland" -}}
 {{- $email := "stian.sporaland@pm.me" -}}
 {{- $signingKey := "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWtc1Kd6hl5ErQk89gs7VP3NvT6kZ8M1u4pckcxTLqd" -}}
-{{- $onepasswordVault := "dotfiles" -}}
 
 [data]
     name = {{ $name | quote }}
     email = {{ $email | quote }}
     signingKey = {{ $signingKey | quote }}
-    onepasswordVault = {{ $onepasswordVault | quote }}
     ephemeral = {{ $ephemeral }}
     headless = {{ $headless }}
     personal = {{ $personal }}
