@@ -1,6 +1,8 @@
+{{- if .ephemeral -}}
 #!/bin/bash
-set -euo pipefail
+set -eufo pipefail
 
 echo "Adding fish to /etc/shells and changing shell to fish"
 echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
 sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
+{{ end -}}
