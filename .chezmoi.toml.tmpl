@@ -20,8 +20,10 @@
 {{- end -}}
 
 {{- if (and (not $ephemeral ) (not $headless)) -}}
-{{- promptBool "Is this a personal machine?" true -}}
-{{- $personal = .result -}}
+    {{- $isPersonal := promptBool "Is this a personal machine?" true -}}
+    {{- if $isPersonal -}}
+        {{-   $personal = true -}}
+    {{- end -}}
 {{- end }}
 
 {{- $name := "Stian Rossavik Sporaland" -}}
