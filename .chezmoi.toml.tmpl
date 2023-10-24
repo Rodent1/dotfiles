@@ -29,18 +29,18 @@
 {{- $name := "Stian Rossavik Sporaland" -}}
 {{- $email := "stian.sporaland@pm.me" -}}
 {{- $signingKey := "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWyQ5lrpe2f0pOXdtWch1BDNbkccWVC6bUwr0htQPq0" -}}
-{{- $onepasswordAccount := "RGFPP2NOSFHP3JQ4Y6RT67FQMY" -}}
+{{- $onepasswordAccount := "7ZMISCBGIJH2JNWOSPRQ4XUAQ4" -}}
 
 [data]
     name = {{ $name | quote }}
     email = {{ $email | quote }}
     signingKey = {{ $signingKey | quote }}
-    onepasswordAccount = {{ $onepasswordAccount | quote }}        
-    ephemeral = {{ $ephemeral }}    
+    onepasswordAccount = {{ $onepasswordAccount | quote }}
+    ephemeral = {{ $ephemeral }}
     headless = {{ $headless }}
     personal = {{ $personal }}
-    hostname = {{ .chezmoi.hostname | quote }}    
-    osid = {{ $osID | quote }}    
+    hostname = {{ .chezmoi.hostname | quote }}
+    osid = {{ $osID | quote }}
 
 {{ if .personal -}}
 encryption = "age"
