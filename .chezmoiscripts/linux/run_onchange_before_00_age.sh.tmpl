@@ -1,6 +1,9 @@
 {{ if .personal -}}
 #!/bin/sh
 
+set -eufo pipefail
+set -x  # Enable debugging
+
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     mkdir -p "${HOME}/.config/chezmoi"
     chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
