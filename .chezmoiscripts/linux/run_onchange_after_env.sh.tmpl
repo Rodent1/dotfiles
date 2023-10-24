@@ -1,9 +1,0 @@
-{{ if and (eq .osid "linux-ubuntu") .personal -}}
-#!/bin/bash
-
-set -eufo pipefail
-set -x  # Enable debugging
-
-export OP_SERVICE_ACCOUNT_TOKEN={{ output "cat" ".config/op/op.key" -}}
-
-{{ end -}}
