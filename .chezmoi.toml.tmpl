@@ -19,7 +19,7 @@
 {{-   $ephemeral = true -}}
 {{- end -}}
 
-{{- if (and (not $ephemeral ) (not $headless)) -}}
+{{- if (and (not .ephemeral ) (not .headless)) -}}
     $personal := promptBool "Personal machine? (true/false)" false
 {{- end }}
 
