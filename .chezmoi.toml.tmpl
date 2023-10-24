@@ -19,8 +19,8 @@
 {{-   $ephemeral = true -}}
 {{- end -}}
 
-{{- if (and (not .ephemeral ) (not .headless)) -}}
-    $personal := promptBool "Personal machine? (true/false)" false
+{{- if (and (not $ephemeral ) (not $headless)) -}}
+{{-   $personal := promptBool "Personal machine? (true/false)" false --}}
 {{- end }}
 
 {{- $name := "Stian Rossavik Sporaland" -}}
