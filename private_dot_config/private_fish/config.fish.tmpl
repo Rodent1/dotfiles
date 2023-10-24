@@ -7,7 +7,7 @@ set -gx ANSIBLE_HOST_KEY_CHECKING False
 set -gx KUBECONFIG /dev/null
 set -gx PY_COLORS true
 set -gx GPG_TTY (tty)
-{{- if $isPersonal -}}
+{{- if .personal -}}
 set -gx OP_SERVICE_ACCOUNT_TOKEN $(cat {{ .chezmoi.homeDir }}/.config/op/op.key)
 {{- end -}}
 
