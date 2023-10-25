@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "linux") -}}
 {{ template "bash.top" . }}
 
-. "$HOME/.bashrc"
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 packages=(
   fish
