@@ -6,7 +6,7 @@
 if ! command -v brew &> /dev/null
 then
   set_color yellow; echo "Installing homebrew..."; set_color normal
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" > /dev/null
   (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.bashrc
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
