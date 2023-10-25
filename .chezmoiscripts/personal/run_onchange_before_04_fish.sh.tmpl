@@ -1,5 +1,5 @@
 {{- if (not .ephemeral) -}}
-{{ lookPath "bash" }}
+#!{{ lookPath "bash" }}
 
 {{ if .debug }}
 set -eufo pipefail
