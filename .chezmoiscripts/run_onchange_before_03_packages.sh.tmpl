@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "linux") -}}
 {{ template "bash.top" . }}
 
-source $HOME/.bashrc
+. "$HOME/.bashrc"
 
 packages=(
   fish
