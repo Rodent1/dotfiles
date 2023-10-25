@@ -1,4 +1,6 @@
 {{ template "fish.top" . }}
 
 # .config/fish/fish_plugins hash: {{ include "private_dot_config/private_fish/fish_plugins.tmpl" | sha256sum }}
+# Install and/or update fisher fish_plugins
+(set_color yellow) echo "Updating fish_plugins..." (set_color normal)
 fisher update
