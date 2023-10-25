@@ -1,6 +1,22 @@
-{{ lookPath "bash" }}
+#!{{ lookPath "bash" }}
 
 {{ if .debug }}
 set -eufo pipefail
 set -x  # Enable debugging
 {{ end }}
+
+set_color() {
+  local color_code
+  case "$1" in
+    black) color_code=0;;
+    red) color_code=1;;
+    green) color_code=2;;
+    yellow) color_code=3;;
+    blue) color_code=4;;
+    magenta) color_code=5;;
+    cyan) color_code=6;;
+    white) color_code=7;;
+    *) color_code=9;;
+  esac
+
+  echo -en "\e[3${color_code}m"
