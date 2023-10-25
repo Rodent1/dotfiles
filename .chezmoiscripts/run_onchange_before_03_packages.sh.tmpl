@@ -1,6 +1,8 @@
 {{- if (eq .chezmoi.os "linux") -}}
 {{ template "bash.top" . }}
 
+source $HOME/.bashrc
+
 packages=(
   fish
   starship 
