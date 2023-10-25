@@ -1,7 +1,7 @@
 {{- if lookPath "fish" -}}
 #!{{- lookPath "fish" -}}
 {{- else -}}
-#!/home/linuxbrew/.linuxbrew/bin/
+#!/home/linuxbrew/.linuxbrew/bin/fish
 {{- end -}}
 
 {{ if .debug }}
