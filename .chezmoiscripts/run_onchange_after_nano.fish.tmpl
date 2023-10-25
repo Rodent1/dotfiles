@@ -5,5 +5,5 @@ if not test -e "$HOME/.nano"
     (set_color yellow)echo "Setting up nano syntax highlighting"(set_color normal)
     git clone https://github.com/scopatz/nanorc.git ~/.nano
 else
-    (set_color green)echo "$HOME/.nano already exists"(set_color normal)
+    echo (set_color green)"$HOME/.nano already exists"(set_color normal)
 end
