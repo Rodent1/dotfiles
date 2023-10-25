@@ -1,4 +1,8 @@
-#!{{ lookPath "fish" }}
+{{- if lookPath "fish" -}}
+#!{{- lookPath "fish" -}}
+{{- else -}}
+#!/home/linuxbrew/.linuxbrew/bin/
+{{- end -}}
 
 {{ if .debug }}
 set fish_trace 1
