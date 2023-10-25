@@ -20,3 +20,4 @@ set_color() {
   esac
 
   echo -en "\e[3${color_code}m"
+}
