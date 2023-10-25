@@ -13,9 +13,9 @@ fi
 if dpkg -l | grep -q 'build-essential'; then
     set_color green; echo "Build-essential is already installed."; set_color normal
 else
-    echo "Build-essential is not installed. Installing..."
-    sudo apt-get update
-    sudo apt-get -y install build-essential
+    set_color yellow; echo "Build-essential is not installed. Installing..."; set_color normal;
+    sudo apt-get update > /dev/null
+    sudo apt-get -y install build-essential > /dev/null
     if [ $? -eq 0 ]; then
         set_color green; echo "Build-essential has been successfully installed."; set_color normal
     else
