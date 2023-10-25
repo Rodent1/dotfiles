@@ -1,7 +1,9 @@
-#!{{ lookPath "bash" }}
+{{ template "fish.top" . }}
 
 # Install nano syntax highlighting
-if [ ! -d ~/.nano ]; then
+if not test -e "$HOME/.nano"
     echo "Setting up nano syntax highlighting"
     git clone https://github.com/scopatz/nanorc.git ~/.nano
-fi
+else
+    echo "$HOME/.nano already exists"
+end

@@ -1,0 +1,5 @@
+{{ lookPath "fish" }}
+
+{{ if .debug }}
+set fish_trace 1
+{{ end }}

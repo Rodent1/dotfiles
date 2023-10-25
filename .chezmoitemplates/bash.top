@@ -1,0 +1,6 @@
+{{ lookPath "bash" }}
+
+{{ if .debug }}
+set -eufo pipefail
+set -x  # Enable debugging
+{{ end }}

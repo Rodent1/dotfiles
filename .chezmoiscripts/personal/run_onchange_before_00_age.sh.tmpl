@@ -1,8 +1,11 @@
 {{ if .personal -}}
-#!/bin/bash
+{{ lookPath "bash" }}
 
+{{ if .debug }}
 set -eufo pipefail
 set -x  # Enable debugging
+{{ end }}
+
 
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     mkdir -p "${HOME}/.config/chezmoi"

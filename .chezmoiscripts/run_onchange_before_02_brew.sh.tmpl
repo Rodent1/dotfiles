@@ -1,27 +1,11 @@
 {{- if (eq .chezmoi.os "linux") -}}
-#!/bin/bash
+{{ lookPath "bash" }}
 
-set -euo pipefail
+{{ if .debug }}
+set -eufo pipefail
 set -x  # Enable debugging
+{{ end }}
 
-packages=(
-  fish
-  starship 
-  gh 
-  thefuck 
-  direnv 
-  go-task/tap/go-task 
-  zoxide 
-  bat 
-  lsd 
-  viddy
-  jq
-  hidetatz/tap/kubecolor
-  nano
-  tldr
-  chezmoi
-  fisher
-)
 
 # If Homebrew is not installed on the system, it will be installed here
 if ! command -v brew &> /dev/null
@@ -34,18 +18,5 @@ else
   echo "Homebrew is already installed."
 fi
 
-# Update homebrew packages
-echo "Initiating Homebrew update..."
-brew update
-
-echo "Installing packages..."
-for package in "${packages[@]}"
-do
-  brew install "$package"
-done
-
-# Update source
-echo "Reloading source"
-source .bashrc
 
 {{ end -}}

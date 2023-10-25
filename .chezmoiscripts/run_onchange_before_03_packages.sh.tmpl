@@ -1,0 +1,38 @@
+{{- if (eq .chezmoi.os "linux") -}}
+{{ lookPath "bash" }}
+
+{{ if .debug }}
+set -eufo pipefail
+set -x  # Enable debugging
+{{ end }}
+
+packages=(
+  fish
+  starship 
+  gh 
+  thefuck 
+  direnv 
+  go-task/tap/go-task 
+  zoxide 
+  bat 
+  lsd 
+  viddy
+  jq
+  hidetatz/tap/kubecolor
+  nano
+  tldr
+  chezmoi
+  fisher
+)
+
+# Update homebrew packages
+echo "Initiating Homebrew update..."
+brew update
+
+echo "Installing packages..."
+for package in "${packages[@]}"
+do
+  brew install "$package"
+done
+
+{{ end -}}

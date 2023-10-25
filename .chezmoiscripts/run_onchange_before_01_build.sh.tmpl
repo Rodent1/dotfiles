@@ -1,8 +1,10 @@
 {{- if (eq .chezmoi.os "linux") -}}
-#!/bin/bash
+{{ lookPath "bash" }}
 
+{{ if .debug }}
 set -eufo pipefail
 set -x  # Enable debugging
+{{ end }}
 
 # Check if we're on an apt-capable system
 if command -v apt-get &> /dev/null; then

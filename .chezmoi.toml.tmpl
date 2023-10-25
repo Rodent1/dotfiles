@@ -2,6 +2,7 @@
 {{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
 {{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
+{{- $debug := true -}}{{/* true if debug mode should be enabled */}}
 {{- "" -}}
 
 {{- $osID := .chezmoi.os -}}
