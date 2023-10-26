@@ -2,5 +2,6 @@
 {{ template "bash.top" . }}
 
 nohup $(getent passwd $(whoami) | cut -d: -f7) 2>&1 &
+disown
 
 {{- end -}}
