@@ -1,7 +1,7 @@
 {{- if and (not .ephemeral ) (not .headless) -}}
 {{ template "bash.top" . }}
 
-exec $(getent passwd $(whoami) | cut -d: -f7)
+exec $(getent passwd $(whoami) | cut -d: -f7) &
 disown
 
 {{- end -}}
