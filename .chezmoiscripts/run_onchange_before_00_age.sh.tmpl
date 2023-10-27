@@ -1,6 +1,5 @@
 {{ if .personal -}}
-#!{{ lookPath "bash" }}
-
+{{ template "bash.top" . }}
 
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     mkdir -p "${HOME}/.config/chezmoi"

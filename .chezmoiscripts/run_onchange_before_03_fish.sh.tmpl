@@ -1,0 +1,16 @@
+{{- if .ephemeral -}}
+{{- if (not .ephemeral) -}}
+
+if ! grep -qxF "/home/linuxbrew/.linuxbrew/bin/fish" /etc/shells; then
+  echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
+fi
+
+sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
+{{- else if .ephemeral -}}
+
+if ! grep -qxF "/home/linuxbrew/.linuxbrew/bin/fish" /etc/shells; then
+  echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
+fi
+
+sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
+{{ end -}}
