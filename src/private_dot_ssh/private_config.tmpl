@@ -17,7 +17,3 @@ Host 172.16.*.*
 Host 10.*.*.*
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
-
-# {{ if .personal }}
-# {{ output "op" "read" "op://dotfiles/ssh config/notesPlain" }}
-# {{ end -}}
