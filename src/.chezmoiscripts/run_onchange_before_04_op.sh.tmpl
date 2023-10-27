@@ -47,7 +47,7 @@ if [ ! -f "$HOME/.config/op/config" ]; then
     if [ ! -d "$HOME/.config/op" ]; then
         mkdir -p "$HOME/.config/op"
     fi
-    
+
     if [ -f "{{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }}" ]; then
         {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key"
         if [ $? -eq 0 ]; then
@@ -63,10 +63,5 @@ if [ ! -f "$HOME/.config/op/config" ]; then
 else
     print_success "1Password CLI config file already exists."
 fi
-
-
-{{ template "bash.bottom" . }}
-{{ else -}}
-{{ template "bash.top" . }}
 
 {{ end -}}
