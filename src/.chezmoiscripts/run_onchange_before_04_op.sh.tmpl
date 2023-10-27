@@ -40,4 +40,33 @@ else
     print_success "1Password CLI is already installed."
 fi
 
+# Check if op config file exists and create it if it doesn't. Check if the operation was successful.
+# {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key"
+if [ ! -f "$HOME/.config/op/config" ]; then
+    # Check if op directory exists
+    if [ ! -d "$HOME/.config/op" ]; then
+        mkdir -p "$HOME/.config/op"
+    fi
+    
+    if [ -f "{{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }}" ]; then
+        {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key"
+        if [ $? -eq 0 ]; then
+            print_success "1Password CLI config file created."
+        else
+            print_error "Failed to create 1Password CLI config file."
+            exit 1
+        fi
+    else
+        print_error "1Password CLI config file not found."
+        exit 1
+    fi
+else
+    print_success "1Password CLI config file already exists."
+fi
+
+
+{{ template "bash.bottom" . }}
+{{ else -}}
+{{ template "bash.top" . }}
+
 {{ end -}}
