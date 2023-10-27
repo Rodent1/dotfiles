@@ -19,7 +19,6 @@ fish_add_path "{{ .chezmoi.homeDir }}/.local/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.cargo/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.krew/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.go/bin"
-
 {{ if lookPath "/home/linuxbrew/.linuxbrew/bin/brew" }}
 if status is-interactive
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
