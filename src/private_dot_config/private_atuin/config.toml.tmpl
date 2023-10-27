@@ -1,0 +1,6 @@
+{{ if and (eq .osid "linux-ubuntu") .personal -}}
+sync_address = "{{- onepasswordRead "op://dotfiles/atuin key/sync_address" -}}"
+key = "~/.config/atuin/atuin.key"
+{{ end -}}
+enter_accept = false
+dialect = "uk"
