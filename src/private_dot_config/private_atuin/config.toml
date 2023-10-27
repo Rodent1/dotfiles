@@ -1,3 +1,4 @@
 sync_address = "https://sh.rodent.cc"
+key_path = "~/.config/atuin/atuin.key"
 enter_accept = false
 dialect = "uk"
