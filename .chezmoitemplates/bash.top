@@ -1,10 +1,18 @@
 #!{{ lookPath "bash" }}
 
-{{ if .debug }}
+# Configuration
 set -eufo pipefail
+{{ if .debug }}
 set -x  # Enable debugging
 {{ end }}
 
+# Icons
+error_icon="\u2717"  # X mark
+warning_icon="\u26A0"  # Warning sign
+info_icon="\u2139"  # Information
+success_icon="\u2713"  # Check mark
+
+# Colors
 set_color() {
   local color_code
   case "$1" in
@@ -18,6 +26,34 @@ set_color() {
     white) color_code=7;;
     *) color_code=9;;
   esac
-
   echo -en "\e[3${color_code}m"
+}
+
+reset_color() {
+  echo -e "\e[0m"
+}
+
+# Functions for standardized messages
+print_error() {
+  set_color "red"
+  echo -e "[${error_icon}] Error: $1"
+  reset_color
+}
+
+print_warning() {
+  set_color "yellow"
+  echo -e "[${warning_icon}] Warning: $1"
+  reset_color
+}
+
+print_info() {
+  set_color "blue"
+  echo -e "[${info_icon}] Info: $1"
+  reset_color
+}
+
+print_success() {
+  set_color "green"
+  echo -e "[${success_icon}] Success: $1"
+  reset_color
 }

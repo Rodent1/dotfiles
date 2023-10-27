@@ -14,5 +14,13 @@ sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 	sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
-sudo apt update && sudo apt install 1password-cli
+print_info "Installing 1password-cli..."
+sudo apt update > /dev/null
+sudo apt -y install 1password-cli > /dev/null
+if [ $? -eq 0 ]; then
+	print_success "1password-cli installed."
+else
+	print_error "1password-cli failed to install."
+	exit 1
+fi
 {{ end -}}
