@@ -1,9 +1,17 @@
+{{ if .personal }}
 {{ template "fish.top" . }}
 
-# Login to atuin login -u rodent
-print_info "Logging in to atuin..."
-if atuin 
-    print_success "Logged in to atuin."
+# Check if the user is already logged in
+if atuin status | grep -q "Error: failed to get status (are you logged in?)"
+    # Login to atuin login -u rodent
+    print_info "Logging in to atuin..."
+    if atuin login -u {{   onepasswordRead "op://dotfiles/atuin key/username" }} -p {{   onepasswordRead "op://dotfiles/atuin key/password" }} -k {{   onepasswordRead "op://dotfiles/atuin key/key" }}
+        print_success "Logged in to atuin."
+    else
+        print_error "Failed to login to atuin."
+    end
 else
-    print_error "Failed to login to atuin."
+    print_info "User is already logged in."
 end
+
+{{ end }}
