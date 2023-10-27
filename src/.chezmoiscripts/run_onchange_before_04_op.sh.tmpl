@@ -4,7 +4,7 @@
 # Check if 'op' command is not available
 if ! command -v op &> /dev/null; then
     ARCH="amd64"
-    OP_VERSION="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')"
+    OP_VERSION="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0.9]+')"
 
     # Check if 'brew' is not available
     if ! command -v brew &> /dev/null; then
@@ -17,15 +17,21 @@ if ! command -v op &> /dev/null; then
         exit 1
     fi
 
+    # Set the installation directory to a user-writable location
+    INSTALL_DIR="$HOME/.local/bin"
+
+    # Create the installation directory if it doesn't exist
+    mkdir -p "$INSTALL_DIR"
+
     # Download and install 1Password CLI
-    curl -sSfo op.zip \
+    curl -sSfo "$INSTALL_DIR/op.zip" \
         https://cache.agilebits.com/dist/1P/op2/pkg/"$OP_VERSION"/op_linux_"$ARCH"_"$OP_VERSION".zip \
-        && sudo unzip -od /usr/local/bin/ op.zip \
-        && rm op.zip
+        && unzip -oq -d "$INSTALL_DIR" "$INSTALL_DIR/op.zip" \
+        && rm "$INSTALL_DIR/op.zip"
 
     # Check if the installation was successful
     if [ $? -eq 0 ]; then
-        print_success "1Password CLI installed."
+        print_success "1Password CLI installed to $INSTALL_DIR."
     else
         print_error "Failed to install 1Password CLI."
         exit 1
