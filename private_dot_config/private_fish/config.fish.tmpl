@@ -15,19 +15,20 @@ set -gx OP_SERVICE_ACCOUNT_TOKEN {{ output "cat" ".config/op/op.key" -}}
 set -gx SOPS_AGE_KEY_FILE {{ .chezmoi.homeDir }}/.config/age/age.key
 {{- end }}
 
-
 fish_add_path "{{ .chezmoi.homeDir }}/.local/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.cargo/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.krew/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.go/bin"
 
-
-{{- if lookPath "/home/linuxbrew/.linuxbrew/bin/brew" }}
+{{ if lookPath "/home/linuxbrew/.linuxbrew/bin/brew" }}
 if status is-interactive
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 end
 {{- end }}
 
+if type -q atuin
+    atuin init fish | source
+end
 
 if type -q direnv
     direnv hook fish | source
