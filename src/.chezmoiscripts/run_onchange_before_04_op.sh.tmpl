@@ -48,8 +48,8 @@ if [ ! -f "$HOME/.config/op/op.key" ]; then
         mkdir -p "$HOME/.config/op"
     fi
 
-    {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key"
-    chmod 600 "$HOME/.config/op/op.key"
+    {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key" \
+        && chmod 600 "$HOME/.config/op/op.key"
 
     # Check if the operation was successful
     if [ $? -eq 0 ]; then
