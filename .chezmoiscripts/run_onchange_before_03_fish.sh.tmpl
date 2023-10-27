@@ -6,13 +6,19 @@ if ! grep -qxF "/home/linuxbrew/.linuxbrew/bin/fish" /etc/shells; then
     print_info "Fish shell added to /etc/shells."
 fi
 
-# Change the default shell to Fish for the current user
-sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
+# Get the current user's default shell
+current_shell=$(getent passwd $(id -un) | cut -d: -f7)
 
-# Check if the shell change was successful
-if [ $? -eq 0 ]; then
-    print_success "Default shell changed to Fish."
+# Check if the current shell is not Fish
+if [ "$current_shell" != "/home/linuxbrew/.linuxbrew/bin/fish" ]; then
+    # Change the default shell to Fish for the current user
+    sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
+    if [ $? -eq 0 ]; then
+        print_success "Default shell changed to Fish."
+    else
+        print_error "Failed to change the default shell to Fish."
+        exit 1
+    fi
 else
-    print_error "Failed to change the default shell to Fish."
-    exit 1
+    print_success "Default shell is already set to Fish."
 fi
