@@ -3,7 +3,6 @@ LogLevel ERROR
 Host *
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
-  IdentityFile ~/.ssh/id_rsa
 {{- if .personal }}
   User stianrs
 {{- end }}
@@ -17,3 +16,6 @@ Host 172.16.*.*
 Host 10.*.*.*
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
+{{ if .personal }}
+{{-   onepasswordRead "op://dotfiles/ssh config/notesPlain" }}
+{{- end }}
