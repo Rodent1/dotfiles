@@ -20,7 +20,7 @@ if ! command -v op &> /dev/null; then
     # Download and install 1Password CLI
     curl -sSfo op.zip \
         https://cache.agilebits.com/dist/1P/op2/pkg/"$OP_VERSION"/op_linux_"$ARCH"_"$OP_VERSION".zip \
-        && unzip -od /usr/local/bin/ op.zip \
+        && sudo unzip -od /usr/local/bin/ op.zip \
         && rm op.zip
 
     # Check if the installation was successful
