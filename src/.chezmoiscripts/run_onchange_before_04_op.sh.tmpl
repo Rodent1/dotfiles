@@ -47,10 +47,7 @@ if [ ! -f "$HOME/.config/op/op.key" ]; then
         mkdir -p "$HOME/.config/op"
     fi
 
-    {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | decrypt }} > "$HOME/.config/op/op.key" \
-        && chmod 600 "$HOME/.config/op/op.key"
-
-    # Check if the operation was successful
+    echo "{{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }}" > "$HOME/.config/op/op.key"
     if [ $? -eq 0 ]; then
         print_success "1Password CLI config file created."
     else
@@ -58,6 +55,8 @@ if [ ! -f "$HOME/.config/op/op.key" ]; then
         exit 1
     fi
     
+    # Set proper permissions for the key file
+    chmod 600 "$HOME/.config/op/op.key"
 
 else
     print_success "1Password CLI config file already exists."
