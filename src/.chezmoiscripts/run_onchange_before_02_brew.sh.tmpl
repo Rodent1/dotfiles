@@ -4,13 +4,17 @@
 
 # Check if Homebrew is installed, and if not, install it
 if ! command -v brew &> /dev/null; then
-    NONINTERACTIVE=1
     print_info "Installing Homebrew..."
-    (curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash > /dev/null) 2> >(while read line; do
-        print_error "$line"
-    done)
-    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.bashrc
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.bashrc
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        print_success "Homebrew has been installed."
+    else
+        print_error "Failed to install Homebrew."
+        exit 1
+    fi
 else
     print_success "Homebrew is already installed."
 fi
