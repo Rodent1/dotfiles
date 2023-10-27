@@ -41,14 +41,13 @@ else
 fi
 
 # Check if op config file exists and create it if it doesn't. Check if the operation was successful.
-# {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key"
 if [ ! -f "$HOME/.config/op/op.key" ]; then
     # Check if op directory exists
     if [ ! -d "$HOME/.config/op" ]; then
         mkdir -p "$HOME/.config/op"
     fi
 
-    {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }} > "$HOME/.config/op/op.key" \
+    {{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | decrypt }} > "$HOME/.config/op/op.key" \
         && chmod 600 "$HOME/.config/op/op.key"
 
     # Check if the operation was successful
