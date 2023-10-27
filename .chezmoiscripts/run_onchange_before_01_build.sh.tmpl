@@ -15,8 +15,7 @@ if dpkg -l | grep -q 'build-essential'; then
 else
     print_info "Installing build-essential..."
     sudo apt-get update > /dev/null
-    sudo apt-get -y install build-essential > /dev/null
-    if test $status -eq 0; then
+    if sudo apt-get -y install build-essential; then
         print_success "Build-essential has been successfully installed."
     else
         print_error "Failed to install build-essential."
