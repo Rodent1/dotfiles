@@ -7,9 +7,10 @@
 shell_path=$(getent passwd $(whoami) | cut -d: -f7)
 
 if [ -n "$shell_path" ]; then
-    # Execute the user's default shell
-    exec "$shell_path" 2>&1
-    disown
+    ## Execute the user's default shell
+    # exec "$shell_path" 2>&1
+    # disown
+    print_success "Type 'fish' to enter the fish shell"
 else
     # Error message if the shell path is not found
     echo "Error: Unable to determine the user's default shell."
