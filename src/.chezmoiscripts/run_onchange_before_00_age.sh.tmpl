@@ -7,7 +7,7 @@ if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     mkdir -p "${HOME}/.config/chezmoi"
 
     # Decrypt the Chezmoi key
-    ${HOME}/bin/chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
+    ${HOME}/bin/chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/.keys/key.txt.age"
 
     # Set the appropriate permissions on the key file
     chmod 600 "${HOME}/.config/chezmoi/key.txt"
