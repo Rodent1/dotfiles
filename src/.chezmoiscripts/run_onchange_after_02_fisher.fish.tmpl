@@ -1,6 +1,6 @@
 {{ template "fish.top" . }}
 
-# .config/fish/fish_plugins hash: {{ include joinPath .chezmoi.sourceDir "private_dot_config/private_fish/fish_plugins.tmpl" | sha256sum }}
+# .config/fish/fish_plugins hash: {{ include ( joinPath .chezmoi.sourceDir "private_dot_config/private_fish/fish_plugins.tmpl" ) | sha256sum }}
 
 # Install and/or update fisher fish_plugins
 print_info "Updating fish_plugins..."
