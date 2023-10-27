@@ -2,15 +2,16 @@
 
 # Configuration
 set -eufo pipefail
+
 {{ if .debug }}
 set -x  # Enable debugging
 {{ end }}
 
 # Icons
-error_icon="\u2717"  # X mark
-warning_icon="\u26A0"  # Warning sign
-info_icon="\u2139"  # Information
-success_icon="\u2713"  # Check mark
+error_icon="❌"       # X mark
+warning_icon="⚠️"    # Warning sign
+info_icon="ℹ️"        # Information
+success_icon="✅"     # Check mark
 
 # Colors
 set_color() {

@@ -2,8 +2,9 @@
 
 # Install nano syntax highlighting
 if not test -e "$HOME/.nano"
-    echo (set_color yellow)"Setting up nano syntax highlighting"(set_color normal)
+    print_info "Setting up nano syntax highlighting..."
     git clone https://github.com/scopatz/nanorc.git ~/.nano
 else
-    echo (set_color green)"$HOME/.nano already exists"(set_color normal)
+    print_success "$HOME/.nano already exists."
 end
+

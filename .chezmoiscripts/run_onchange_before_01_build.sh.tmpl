@@ -1,25 +1,25 @@
 {{- if (eq .chezmoi.os "linux") -}}
 {{ template "bash.top" . }}
 
-# Check if we're on an apt-capable system
+# Check if the system supports APT package manager
 if command -v apt-get &> /dev/null; then
-    set_color yellow; echo "System is apt-capable."; set_color normal
+    print_info "System supports the APT package manager."
 else
-    set_color red; echo "This system does not use apt package manager."; set_color normal
+    print_error "This system does not use the APT package manager."
     exit 1
 fi
 
 # Check if build-essential is installed
 if dpkg -l | grep -q 'build-essential'; then
-    set_color green; echo "Build-essential is already installed."; set_color normal
+    print_success "Build-essential is already installed."
 else
-    set_color yellow; echo "Build-essential is not installed. Installing..."; set_color normal;
+    print_info "Installing build-essential..."
     sudo apt-get update > /dev/null
     sudo apt-get -y install build-essential > /dev/null
-    if [ $? -eq 0 ]; then
-        set_color green; echo "Build-essential has been successfully installed."; set_color normal
+    if test $status -eq 0; then
+        print_success "Build-essential has been successfully installed."
     else
-        set_color red; echo "Failed to install build-essential."; set_color normal
+        print_error "Failed to install build-essential."
         exit 1
     fi
 fi

@@ -9,10 +9,10 @@ set fish_trace 1
 {{ end }}
 
 # Icons
-set -g error_icon "❌"  # Cross mark
-set -g warning_icon "⚠️"  # Warning sign
-set -g info_icon "ℹ"  # Information (using the "i" symbol)
-set -g success_icon "✅"  # Check mark
+set -g error_icon "❌"       # X mark
+set -g warning_icon "⚠️"    # Warning sign
+set -g info_icon "ℹ️"       # Information
+set -g success_icon "✅"    # Check mark
 
 # Functions for standardized messages
 function print_error

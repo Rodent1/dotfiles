@@ -1,6 +1,18 @@
 {{ template "bash.top" . }}
+
+# Check if Fish shell is in /etc/shells, and if not, add it
 if ! grep -qxF "/home/linuxbrew/.linuxbrew/bin/fish" /etc/shells; then
-  echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
+    echo "/home/linuxbrew/.linuxbrew/bin/fish" | sudo tee -a /etc/shells
+    print_info "Fish shell added to /etc/shells."
 fi
 
+# Change the default shell to Fish for the current user
 sudo chsh "$(id -un)" --shell "/home/linuxbrew/.linuxbrew/bin/fish"
+
+# Check if the shell change was successful
+if [ $? -eq 0 ]; then
+    print_success "Default shell changed to Fish."
+else
+    print_error "Failed to change the default shell to Fish."
+    exit 1
+fi

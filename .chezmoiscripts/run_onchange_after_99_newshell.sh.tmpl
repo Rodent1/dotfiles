@@ -1,7 +1,20 @@
 {{- if and (not .ephemeral ) (not .headless) -}}
 {{ template "bash.top" . }}
 
-exec $(getent passwd $(whoami) | cut -d: -f7) 2>&1
-disown
+#!/bin/bash
+
+# Get the shell path of the current user
+shell_path=$(getent passwd $(whoami) | cut -d: -f7)
+
+if [ -n "$shell_path" ]; then
+    # Execute the user's default shell
+    exec "$shell_path" 2>&1
+    disown
+else
+    # Error message if the shell path is not found
+    echo "Error: Unable to determine the user's default shell."
+    exit 1
+fi
+
 
 {{- end -}}

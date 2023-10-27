@@ -1,31 +1,36 @@
 {{ if and (eq .osid "linux-ubuntu") .personal -}}
 {{ template "bash.top" . }}
 
-if ! command -v op &> /dev/null
-then
-	curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-		sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+# Check if 'op' command is not available
+if ! command -v op &> /dev/null; then
+    # Download and add 1Password archive keyring
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+        sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
 
-	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
-		sudo tee /etc/apt/sources.list.d/1password.list
+    # Add 1Password repository to sources list
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
+        sudo tee /etc/apt/sources.list.d/1password.list
 
-	sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
-	curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
-		sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
-	sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
-	curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
-		sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+    # Set up debsig policies and keyrings
+    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+        sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+    sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+    curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+        sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
-	print_info "Installing 1password-cli..."
-	sudo apt update > /dev/null
-	sudo apt -y install 1password-cli > /dev/null
-	if [ $? -eq 0 ]; then
-		print_success "1password-cli installed."
-	else
-		print_error "1password-cli failed to install."
-		exit 1
-	fi
+    # Install 1Password CLI
+    print_info "Installing 1Password CLI..."
+    sudo apt update > /dev/null
+    sudo apt -y install 1password-cli > /dev/null
+    if [ $? -eq 0 ]; then
+        print_success "1Password CLI installed."
+    else
+        print_error "Failed to install 1Password CLI."
+        exit 1
+    fi
 else
-	print_success "1password-cli already installed."
+    print_success "1Password CLI is already installed."
 fi
+
 {{ end -}}

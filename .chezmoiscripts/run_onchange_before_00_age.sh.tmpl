@@ -1,9 +1,24 @@
 {{ if .personal -}}
 {{ template "bash.top" . }}
 
+# Check if the Chezmoi key file exists
 if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
+    # Create the Chezmoi configuration directory if it doesn't exist
     mkdir -p "${HOME}/.config/chezmoi"
+
+    # Decrypt the Chezmoi key
     ${HOME}/bin/chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
+
+    # Set the appropriate permissions on the key file
     chmod 600 "${HOME}/.config/chezmoi/key.txt"
+
+    if [ $? -eq 0 ]; then
+        print_success "Chezmoi key file has been successfully created and secured."
+    else
+        print_error "Failed to create or secure the Chezmoi key file."
+        exit 1
+    fi
 fi
+
+
 {{- end -}}
