@@ -1,0 +1,9 @@
+{{ template "fish.top" . }}
+
+# Login to atuin login -u rodent
+print_info "Logging in to atuin..."
+if atuin 
+    print_success "Logged in to atuin."
+else
+    print_error "Failed to login to atuin."
+end
