@@ -8,11 +8,16 @@ Host *
   User stianrs
 {{- end }}
 
-{{- if (eq .chezmoi.os "darwin") }}
-  IgnoreUnknown UseKeychain
-  UseKeychain yes
-{{- end }}
+Host 192.168.*.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+Host 172.16.*.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+Host 10.*.*.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
 
-{{ if .personal -}}
+{{ if .personal }}
 {{ output "op" "read" "op://dotfiles/ssh config/notesPlain" }}
 {{ end -}}
