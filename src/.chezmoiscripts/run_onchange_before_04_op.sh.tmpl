@@ -49,12 +49,12 @@ if [ ! -f "$HOME/.config/op/op.key" ]; then
 
     echo "{{ joinPath .chezmoi.sourceDir "/.keys/op.key.age" | include | decrypt }}" > "$HOME/.config/op/op.key"
     if [ $? -eq 0 ]; then
-        print_success "1Password CLI config file created."
+        print_success "1Password CLI key file created."
         
         # Export the contents of the key file to the environment variable OP_SERVICE_ACCOUNT_TOKEN
         export OP_SERVICE_ACCOUNT_TOKEN=$(cat "$HOME/.config/op/op.key")
     else
-        print_error "Failed to create 1Password CLI config file."
+        print_error "Failed to create 1Password CLI key file."
         exit 1
     fi
     
@@ -62,7 +62,7 @@ if [ ! -f "$HOME/.config/op/op.key" ]; then
     chmod 600 "$HOME/.config/op/op.key"
 
 else
-    print_success "1Password CLI config file already exists."
+    print_success "1Password CLI key file already exists."
 fi
 
 {{ end -}}
