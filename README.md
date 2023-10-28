@@ -5,8 +5,6 @@ This repository contains my dotfiles, organized and managed with the dotfile man
 
 ### Installation
 
-You can install it by running the following command:
-
 ```sh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Rodent1
 ```
