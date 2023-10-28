@@ -10,7 +10,6 @@ if ! command -v brew &> /dev/null; then
     if [ $? -eq 0 ]; then
         (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> {{ .chezmoi.homeDir }}/.bashrc
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"  # Add brew to the PATH for the current session
         print_success "Homebrew has been installed."
     else
         print_error "Failed to install Homebrew."

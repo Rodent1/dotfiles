@@ -2,10 +2,10 @@
 
 # Configuration
 set -eufo pipefail
-
-{{ if .debug }}
+{{- if .debug -}}
 set -x  # Enable debugging
-{{ end }}
+{{- end -}}
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"  # Add brew to the PATH
 
 # Icons
 error_icon="❌"       # X mark
