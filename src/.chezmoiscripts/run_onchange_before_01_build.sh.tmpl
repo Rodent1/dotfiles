@@ -14,8 +14,8 @@ if dpkg -l | grep -q 'build-essential'; then
     print_success "Build-essential is already installed."
 else
     print_info "Installing build-essential..."
-    sudo apt update > /dev/null
-    sudo apt -y install build-essential > /dev/null;
+    sudo apt-get update > /dev/null
+    sudo apt-get -y install build-essential > /dev/null;
 
     if [ $? -eq 0 ]; then
         print_success "Build-essential has been successfully installed."
@@ -28,8 +28,8 @@ fi
 # Install age if it's not already installed
 if ! command -v age &>/dev/null; then
     print_info "Installing age now..."
-    sudo apt update > /dev/null
-    sudo apt -y install age > /dev/null;    
+    sudo apt-get update > /dev/null
+    sudo apt-get -y install age > /dev/null;    
 
     if [ $? -eq 0 ]; then
         print_success "age has been successfully installed."
