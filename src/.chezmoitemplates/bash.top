@@ -4,7 +4,7 @@
 set -eufo pipefail
 {{- if .debug -}}
 set -x  # Enable debugging
-{{- end -}}
+{{- end }}
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"  # Add brew to the PATH
 
 # Icons
