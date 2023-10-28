@@ -6,8 +6,14 @@ if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     # Create the Chezmoi configuration directory if it doesn't exist
     mkdir -p "${HOME}/.config/chezmoi"
 
+    # Check if the chezmoi binary exists
+    if ! command -v chezmoi &> /dev/null; then
+        print_error "Could not find chezmoi binary."
+        exit 1        
+    fi
+
     # Decrypt the Chezmoi key
-    ${HOME}/bin/chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/.keys/key.txt.age"
+    chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/.keys/key.txt.age"
 
     # Set the appropriate permissions on the key file
     chmod 600 "${HOME}/.config/chezmoi/key.txt"
