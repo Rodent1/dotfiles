@@ -13,7 +13,7 @@ if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
     fi
 
     # Decrypt the Chezmoi key
-    chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/.keys/key.txt.age"
+    $HOME/bin/chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/.keys/key.txt.age"
 
     # Set the appropriate permissions on the key file
     chmod 600 "${HOME}/.config/chezmoi/key.txt"
