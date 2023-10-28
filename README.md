@@ -1,6 +1,6 @@
 ![Repository Banner](img/banner.png)
 
-This repository contains my dotfiles, organized and managed with the dotfile management tool, [chezmoi](https://github.com/twpayne/chezmoi). These dotfiles allow me to customize and configure my development environment to suit my workflow and preferences.
+This repository contains my dotfiles, organized and managed with the dotfile management tool, [chezmoi](https://www.chezmoi.io/). These dotfiles allow me to customize and configure my development environment to suit my workflow and preferences.
 
 
 ### Installation
