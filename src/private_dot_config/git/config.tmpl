@@ -1,7 +1,9 @@
 [user]
   name = {{ .name }}
   email = {{ .email }}
+{{ if .personal -}}
   signingKey = {{ .signingKey }}
+{{- end }}
 [gpg]
   format = ssh
 [format]
