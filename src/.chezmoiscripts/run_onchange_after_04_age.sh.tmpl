@@ -1,0 +1,23 @@
+{{ if .personal -}}
+{{ template "bash.top" . }}
+
+# Check if age key is installed in ~/.config/age/age.key
+if [ ! -f "${HOME}/.config/age/age.key" ]; then
+    # Create the age configuration directory if it doesn't exist
+    mkdir -p "${HOME}/.config/age"
+
+    # Load the key from onepassword
+    echo "{{ onepasswordRead "op://dotfiles/Age key/notesPlain" }}" > "${HOME}/.config/age/age.key"
+
+    # Set the appropriate permissions on the key file
+    chmod 600 "${HOME}/.config/age/age.key"
+
+    if [ $? -eq 0 ]; then
+        print_success "Age key file has been successfully created and secured."
+    else
+        print_error "Failed to create or secure the age key file."
+        exit 1
+    fi
+fi
+
+{{- end -}}
