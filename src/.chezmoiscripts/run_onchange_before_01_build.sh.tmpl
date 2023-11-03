@@ -25,20 +25,4 @@ else
     fi
 fi
 
-# Install age if it's not already installed
-if ! command -v age &>/dev/null; then
-    print_info "Installing age now..."
-    sudo apt-get update > /dev/null 2>&1
-    sudo apt-get -y install age > /dev/null 2>&1;    
-
-    if [ $? -eq 0 ]; then
-        print_success "age has been successfully installed."
-    else
-        print_error "Failed to install age."
-        exit 1
-    fi
-else
-    print_success "age is already installed."
-fi
-
 {{ end -}}
