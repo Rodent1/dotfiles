@@ -7,9 +7,6 @@ set -gx ANSIBLE_HOST_KEY_CHECKING False
 set -gx KUBECONFIG /dev/null
 set -gx PY_COLORS true
 set -gx GPG_TTY (tty)
-{{ if (and (stat (joinPath .chezmoi.homeDir ".config/op/op.key") ) (.personal)) -}}
-set -gx OP_SERVICE_ACCOUNT_TOKEN {{ joinPath .chezmoi.homeDir ".config/op/op.key" | include -}}
-{{- end -}}
 
 {{- if stat (joinPath .chezmoi.homeDir ".config/age/age.key") }}
 set -gx SOPS_AGE_KEY_FILE {{ .chezmoi.homeDir }}/.config/age/age.key
