@@ -2,7 +2,7 @@
   name = {{ .name }}
   email = {{ .email }}
 {{ if .personal -}}
-  signingKey = {{ .signingKey }}
+  signingKey = id_ed25519
 {{- end }}
 [gpg]
   format = ssh
