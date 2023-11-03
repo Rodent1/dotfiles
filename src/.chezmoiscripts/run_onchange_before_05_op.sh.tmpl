@@ -19,7 +19,7 @@ if ! command -v op &> /dev/null; then
     else
         print_success "1Password CLI is installed."
         print_success "Authenticating with 1Password CLI..."
-        eval $(op signin)
+        eval $(op.exe signin)
     fi
 else
     echo "1Password CLI is already installed."
