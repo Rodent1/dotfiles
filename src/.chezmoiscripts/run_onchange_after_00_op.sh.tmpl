@@ -1,0 +1,13 @@
+{{ if and (eq .osid "linux-ubuntu") .personal -}}
+{{ template "bash.top" . }}
+
+# Check if 'op.exe' command is available
+if ! command -v op.exe &> /dev/null; then
+  print_error "1Password CLI is not installed. Please install it first."
+  exit 1
+else
+  print_success "Authentiating with 1Password CLI..."
+  eval $(op.exe signin)
+fi
+
+{{ end -}}
