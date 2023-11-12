@@ -33,7 +33,7 @@
 [push]
   autoSetupRemote = true
 [alias]
-  yolo = !git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
+  yolo = !git commit -m \"$(curl -L -s whatthecommit.com/index.txt)\"
   a = add
   ap = add -p
   amc = am --continue
