@@ -2,8 +2,8 @@ LogLevel ERROR
 
 Host *
   AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_ed25519
 {{- if .personal }}
+  IdentityFile ~/.ssh/id_ed25519
   User stianrs
 {{- end }}
 
