@@ -1,0 +1,7 @@
+function dig --wraps=doggo --description 'doggo shorthand'
+    if type -q doggo
+        doggo $argv
+    else
+        {{ lookPath "dig" }} $argv
+    end
+end
